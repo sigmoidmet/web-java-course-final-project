@@ -8,7 +8,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -16,3 +16,6 @@ spring:
 jwt:
   secret-key: ${JWT_SECRET_KEY:secret}
   validity-in-ms: ${JWT_VALIDITY_IN_MS:3600000} # default is 1 hour
+
+authentication:
+  max-failed-logins: 5

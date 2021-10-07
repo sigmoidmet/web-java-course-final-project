@@ -1,5 +1,6 @@
-package com.example.final_project.config;
+package com.example.final_project.authentication;
 
+import com.example.final_project.config.properties.JwtProperties;
 import com.example.final_project.exception.InvalidJwtAuthenticationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

@@ -1,4 +1,4 @@
-package com.example.final_project.config;
+package com.example.final_project.authentication;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

@@ -39,6 +39,9 @@ public class Client {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @JsonIgnore
+    private int failedLoginAttempts = 0;
+
     private boolean disabled;
 
     @Override

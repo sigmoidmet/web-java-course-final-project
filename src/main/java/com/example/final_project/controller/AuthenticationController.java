@@ -1,6 +1,6 @@
 package com.example.final_project.controller;
 
-import com.example.final_project.config.JwtTokenProvider;
+import com.example.final_project.authentication.JwtTokenProvider;
 import com.example.final_project.dto.ClientCredentialsDto;
 import lombok.RequiredArgsConstructor;
 

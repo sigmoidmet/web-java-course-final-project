@@ -1,5 +1,7 @@
 package com.example.final_project.config;
 
+import com.example.final_project.authentication.JwtAuthenticationEntryPoint;
+import com.example.final_project.authentication.JwtTokenAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

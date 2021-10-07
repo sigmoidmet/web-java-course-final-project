@@ -1,13 +1,12 @@
 package com.example.final_project.infrastructure;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -81,6 +80,16 @@ public class ExceptionControllerAdvice {
                                     badCredentialsException.getMessage());
     }
 
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<?> handleBadCredentialsException(DisabledException disabledException,
+                                                           HttpServletRequest request) {
+
+        return createResponseEntity(disabledException,
+                                    request,
+                                    HttpStatus.LOCKED,
+                                    disabledException.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobal(Exception exception, HttpServletRequest request) {
         return createResponseEntity(exception,
@@ -108,14 +117,4 @@ public class ExceptionControllerAdvice {
                 status
         );
     }
-}
-
-@Data
-@Builder
-class FieldValidation {
-    private final String field;
-
-    private final String message;
-
-    private final String rejectedValue;
 }

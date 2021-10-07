@@ -1,4 +1,4 @@
-package com.example.final_project.config;
+package com.example.final_project.config.properties;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
