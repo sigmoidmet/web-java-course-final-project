@@ -28,15 +28,9 @@ public class ClientServiceImpl implements ClientService {
     }
 
     private void validateNewClientFields(Client client) {
-        if (clientRepository.findByEmail(client.getEmail()).isPresent()) {
+        if (clientRepository.existsByEmail(client.getEmail())) {
             throw new ExistingUserException("The user with email " + client.getEmail() + " already exists.");
         }
-    }
-
-    @Override
-    public boolean isPasswordTheSame(Long clientId, String password) {
-        Client client = getById(clientId);
-        return passwordEncoder.matches(password, client.getPassword());
     }
 
     @Override

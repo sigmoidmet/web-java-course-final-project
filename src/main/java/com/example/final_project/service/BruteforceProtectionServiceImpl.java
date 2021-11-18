@@ -1,5 +1,6 @@
 package com.example.final_project.service;
 
+import com.example.final_project.exception.DisabledClientTriedToLoginException;
 import com.example.final_project.model.Client;
 import com.example.final_project.repository.ClientRepository;
 import lombok.extern.log4j.Log4j2;
@@ -31,6 +32,10 @@ public class BruteforceProtectionServiceImpl implements BruteforceProtectionServ
     }
 
     private void incrementFailedLoginAttemptsToClient(Client client) {
+        if (client.isDisabled()) {
+            throw new DisabledClientTriedToLoginException("Client " + client.getEmail() + " is disabled and can't try to login anymore.");
+        }
+
         client.setFailedLoginAttempts(client.getFailedLoginAttempts() + 1);
 
         if (client.getFailedLoginAttempts() > maxFailedLogins) {

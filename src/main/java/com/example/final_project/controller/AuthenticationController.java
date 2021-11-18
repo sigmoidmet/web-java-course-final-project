@@ -1,7 +1,7 @@
 package com.example.final_project.controller;
 
 import com.example.final_project.authentication.JwtTokenProvider;
-import com.example.final_project.dto.ClientCredentialsDto;
+import com.example.final_project.pojo.ClientCredentialsDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.authentication.AuthenticationManager;

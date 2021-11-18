@@ -10,6 +10,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
@@ -60,14 +61,13 @@ public class ExceptionControllerAdvice {
                 ).toString();
     }
 
-    @ExceptionHandler(HttpMessageConversionException.class)
-    public ResponseEntity<?> handleMessageNotReadableException(HttpMessageConversionException messageConversionException,
-                                                               HttpServletRequest request) {
+    @ExceptionHandler({HttpMessageConversionException.class, HttpMediaTypeNotSupportedException.class})
+    public ResponseEntity<?> handleBadRequestException(RuntimeException badRequestException, HttpServletRequest request) {
 
-        return createResponseEntity(messageConversionException,
+        return createResponseEntity(badRequestException,
                                     request,
                                     HttpStatus.BAD_REQUEST,
-                                    messageConversionException.getMessage());
+                                    badRequestException.getMessage());
     }
 
     @ExceptionHandler(BadCredentialsException.class)

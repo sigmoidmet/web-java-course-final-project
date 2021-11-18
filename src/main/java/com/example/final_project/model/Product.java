@@ -1,54 +1,43 @@
 package com.example.final_project.model;
 
 import com.example.final_project.infrastructure.OnCreate;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Client {
+@RequiredArgsConstructor
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Null(groups = {OnCreate.class})
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    @Email
-    private String email;
+    @NotEmpty
+    private String title;
 
     @NotNull
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+    private Long available;
 
-    @JsonIgnore
-    @Builder.Default
-    private int failedLoginAttempts = 0;
-
-    @JsonIgnore
-    private boolean disabled;
+    @NotNull
+    private BigDecimal price;
 
     @Override
     public boolean equals(Object o) {
@@ -58,17 +47,12 @@ public class Client {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
             return false;
         }
-        Client client = (Client) o;
-
-        if (this.email == null || client.email == null) {
-            return false;
-        }
-
-        return Objects.equals(email, client.email);
+        Product product = (Product) o;
+        return id != null && Objects.equals(id, product.id);
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return 4645645;
     }
 }

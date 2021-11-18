@@ -12,6 +12,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    protocol: smtp
+    host: ${EMAIL_HOST:127.0.0.1}
+    port: ${EMAIL_PORT:25}
+    username: ${EMAIL:any}
+    password: ${EMAIL_PASSWORD:any}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 jwt:
   secret-key: ${JWT_SECRET_KEY:secret}
@@ -19,3 +31,12 @@ jwt:
 
 authentication:
   max-failed-logins: 5
+
+password-reset-settings:
+  token-expiration_duration: PT1H
+  url: "static/reset_password.html"
+
+url-processor:
+  scheme: ${SCHEME:http}
+  host: ${HOST:localhost}
+  port: ${PORT:8081}
