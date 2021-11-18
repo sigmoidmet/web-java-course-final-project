@@ -2,7 +2,7 @@ package com.example.final_project.service;
 
 import com.example.final_project.config.properties.PasswordResetProperties;
 import com.example.final_project.pojo.EmailMessage;
-import com.example.final_project.exception.InvalidPasswordResetRequest;
+import com.example.final_project.exception.InvalidPasswordResetRequestException;
 import com.example.final_project.exception.NoSuchEntityException;
 import com.example.final_project.infrastructure.EmailTemplate;
 import com.example.final_project.model.Client;
@@ -86,7 +86,7 @@ public class PasswordResetRequestServiceImpl implements PasswordResetRequestServ
                 .filter(this::isRequestValid)
                 .stream().peek(passwordResetRequestRepository::delete)
                 .findFirst()
-                .orElseThrow(() -> new InvalidPasswordResetRequest("This token isn't identified any valid request."))
+                .orElseThrow(() -> new InvalidPasswordResetRequestException("This token isn't identified any valid request."))
                 .getClient();
     }
 

@@ -1,7 +1,7 @@
 package com.example.final_project;
 
 import com.example.final_project.config.properties.PasswordResetProperties;
-import com.example.final_project.exception.InvalidPasswordResetRequest;
+import com.example.final_project.exception.InvalidPasswordResetRequestException;
 import com.example.final_project.exception.NoSuchEntityException;
 import com.example.final_project.model.Client;
 import com.example.final_project.model.PasswordResetRequest;
@@ -79,15 +79,17 @@ public class PasswordResetRequestServiceTest {
                 )
         ));
 
-        assertThrows(InvalidPasswordResetRequest.class,
-                     () -> passwordResetRequestService.findClientByPasswordResetRequestToken("13"));
+        assertThrows(
+                InvalidPasswordResetRequestException.class,
+                () -> passwordResetRequestService.findClientByPasswordResetRequestToken("13"));
     }
 
     @Test
     void findClientByPasswordResetRequestTokenWhenEmptyThrowException() {
         when(passwordResetRequestRepository.findById(any())).thenReturn(Optional.empty());
 
-        assertThrows(InvalidPasswordResetRequest.class,
-                     () -> passwordResetRequestService.findClientByPasswordResetRequestToken("13"));
+        assertThrows(
+                InvalidPasswordResetRequestException.class,
+                () -> passwordResetRequestService.findClientByPasswordResetRequestToken("13"));
     }
 }

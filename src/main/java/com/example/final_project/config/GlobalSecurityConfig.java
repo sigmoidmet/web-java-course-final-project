@@ -31,7 +31,7 @@ public class GlobalSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anonymous()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register", "/error", "/login", "/clients/password",
+                .antMatchers("/register", "/error", "/login", "/clients/password", "/products", "/cart",
                              "/clients/password/reset/request", "/static/reset_password.html").permitAll()
                 .anyRequest().authenticated()
                 .and()

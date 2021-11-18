@@ -7,4 +7,6 @@ public interface ClientService {
     Client register(Client client);
 
     void resetPassword(Long clientId, String newPassword);
+
+    Client getByEmail(String email);
 }

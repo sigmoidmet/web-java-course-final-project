@@ -46,4 +46,10 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findById(clientId)
                 .orElseThrow(() -> new NoSuchEntityException("There is no client by id " + clientId));
     }
+
+    @Override
+    public Client getByEmail(String email) {
+        return clientRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchEntityException("There is no client by email " + email));
+    }
 }
